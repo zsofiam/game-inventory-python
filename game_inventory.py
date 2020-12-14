@@ -10,8 +10,11 @@ def display_inventory(inventory):
 
 
 def add_to_inventory(inventory, added_items):
-    """Add to the inventory dictionary a list of items from added_items."""
-    pass
+    for element in added_items:
+        if element in inventory.keys():
+            inventory[element] += 1
+        else:
+            inventory[element] = 1
 
 
 def remove_from_inventory(inventory, removed_items):
@@ -41,5 +44,7 @@ def export_inventory(inventory, filename):
 
 
 if __name__ == "__main__":
-    display_inventory({'rope': 1, 'torch': 6, 'blanket': 3})
-    display_inventory({})
+    inventory = {'rope': 1, 'torch': 6, 'blanket': 3}
+    display_inventory(inventory)
+    add_to_inventory(inventory, ['dagger', 'shield', 'bread', 'torch', 'dagger'])
+    display_inventory(inventory)
