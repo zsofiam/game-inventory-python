@@ -5,8 +5,8 @@
 
 
 def display_inventory(inventory):
-    """Display the contents of the inventory in a simple way."""
-    pass
+    for key, value in inventory.items(): 
+        print(f'{key}, {value}')
 
 
 def add_to_inventory(inventory, added_items):
@@ -38,3 +38,8 @@ def export_inventory(inventory, filename):
     """Export the inventory into a CSV file."""
 
     pass
+
+
+if __name__ == "__main__":
+    display_inventory({'rope': 1, 'torch': 6, 'blanket': 3})
+    display_inventory({})
