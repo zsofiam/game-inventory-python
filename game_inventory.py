@@ -37,10 +37,14 @@ item name | count
     print("""-----------------""")
 
 
-def import_inventory(inventory, filename):
-    """Import new inventory items from a CSV file."""
-
-    pass
+def import_inventory(inventory, filename="test_inventory.csv"):
+    try:
+        f = open(filename, "r")
+    except FileNotFoundError:
+        print(f'File "{filename}" not found!')
+    else:
+        content_of_file_as_list = f.read().split(",")
+        add_to_inventory(inventory, content_of_file_as_list)
 
 
 def export_inventory(inventory, filename):
@@ -51,8 +55,5 @@ def export_inventory(inventory, filename):
 
 if __name__ == "__main__":
     inventory = {'rope': 1, 'torch': 6, 'blanket': 3, 'gold coin': 2}
-    print_table(inventory, 'count, asc')
-    print("")
-    print_table(inventory)
-    print("")
+    import_inventory(inventory, "test_inventory.csv")
     print_table(inventory, 'count, desc')
