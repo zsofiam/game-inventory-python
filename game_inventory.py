@@ -45,15 +45,28 @@ def import_inventory(inventory, filename="test_inventory.csv"):
     else:
         content_of_file_as_list = f.read().split(",")
         add_to_inventory(inventory, content_of_file_as_list)
+        f.close()
 
 
-def export_inventory(inventory, filename):
-    """Export the inventory into a CSV file."""
-
-    pass
+def export_inventory(inventory, filename="export_inventory.csv"):
+    try:
+        f = open(filename, "w")
+    except IOError:
+        print(f'You don\'t have permission creating file \'{filename}\'!')
+    else:
+        f = open(filename, "w")
+        f.write('')
+        f.close()
+        f = open(filename, "a")
+        inventory_list = []
+        for key, value in inventory.items():
+            for i in range(value):
+                inventory_list.append(key)
+        inventory_string = ",".join(inventory_list)
+        f.write(inventory_string)
+        f.close()
 
 
 if __name__ == "__main__":
     inventory = {'rope': 1, 'torch': 6, 'blanket': 3, 'gold coin': 2}
-    import_inventory(inventory, "test_inventory.csv")
-    print_table(inventory, 'count, desc')
+    export_inventory(inventory)
